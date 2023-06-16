@@ -1,23 +1,23 @@
 #include <stdio.h>
 
-int main() {
-    int marks;
-    
-    printf("Enter the marks: ");
-    scanf("%d", &marks);
-    
-    if (marks >= 90 && marks <= 100) {
-        printf("Grade A\n");
-    } else if (marks >= 75 && marks <= 89) {
-        printf("Grade B\n");
-    } else if (marks >= 60 && marks <= 74) {
-        printf("Grade C\n");
-    } else if (marks >= 50 && marks <= 59) {
-        printf("Grade D\n");
-    } else if (marks >= 0 && marks <= 49) {
-        printf("Grade F\n");
-    } else {
-        printf("Invalid marks entered\n");
+void printBits(int num) {
+    for (int i = 31; i >= 0; i--) {
+        int bit = (num >> i) & 1;
+        printf("%d", bit);
     }
+}
+
+int main() {
+    int num;
+
+    
+    printf("Enter a 32-bit integer: ");
+    scanf("%d", &num);
+
+    
+    printf("Bits representation: ");
+    printBits(num);
+    printf("\n");
+
     return 0;
 }

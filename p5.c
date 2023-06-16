@@ -1,34 +1,27 @@
+
 #include <stdio.h>
 
-int bit_operations(int num, int oper_type) {
-    switch (oper_type) {
-        case 1:
-            num |= (1 << 0);
-            break;
-        case 2:
-            num &= ~(1 << 30);
-            break;
-        case 3:
-            num ^= (1 << 15);
-            break;
-        default:
-            printf("Error: Invalid operation type!\n");
-            break;
+int countSetBits(int num) {
+    int count = 0;
+
+    while (num > 0) {
+        count += num & 1;
+        num >>= 1;
     }
 
-    return num;
+    return count;
 }
 
 int main() {
-    int num, oper_type;
-    
-    printf("Enter the integer: ");
-    scanf("%d", &num);
+    int arr[] = {0x1, 0xF4, 0x10001};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int totalBits = 0;
 
-    printf("Enter the operation type (1, 2, or 3): ");
-    scanf("%d", &oper_type);
+    for (int i = 0; i < size; i++) {
+        totalBits += countSetBits(arr[i]);
+    }
 
-    int result = bit_operations(num, oper_type);
-    printf("Result: %d\n", result);
+    printf("Total number of set bits: %d\n", totalBits);
+
     return 0;
 }

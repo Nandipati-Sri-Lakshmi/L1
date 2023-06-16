@@ -1,19 +1,34 @@
 #include <stdio.h>
+void printNumbers(int n) {
+    for (int i = 1; i <= n; i++) {
+        printf("%d", i);
+    }
+}
+void printSpaces(int n) {
+    for (int i = 1; i <= n; i++) {
+        printf(" ");
+    }
+}
 
-int findBiggest(int num1, int num2) {
-    if (num1 > num2) {
-        return num1;
-    } else {
-        return num2;
+void printReverseNumbers(int n) {
+    for (int i = n; i >= 1; i--) {
+        printf("%d", i);
     }
 }
 
 int main() {
-    int num1, num2;
-    printf("Enter two numbers: ");
-    scanf("%d %d", &num1, &num2);
+    int n;
 
-    int result = findBiggest(num1, num2);
-    printf("The biggest number is: %d\n", result);
+    printf("Enter the value of n: ");
+    scanf("%d", &n);
+
+
+    for (int i = 1; i <= n; i++) {
+        printNumbers(i);
+        printSpaces(2 * (n - i));
+        printReverseNumbers(i);
+        printf("\n");
+    }
+
     return 0;
 }

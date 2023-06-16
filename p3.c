@@ -1,36 +1,47 @@
+
+
+
+
+
 #include <stdio.h>
 
+int findLargestAfterDigitDeletion(int num) {
+    int max = -1;  
+    for (int i = 0; i < 4; i++) {
+        int temp = num / 10;  
+        int power = 1;        
+
+       
+        for (int j = 0; j < 3; j++) {
+            if (j != i) {
+                temp += (num % 10) * power;
+                power *= 10;
+            }
+            num /= 10;
+        }
+
+       
+        if (temp > max) {
+            max = temp;
+        }
+
+        num = temp; 
+    }
+
+    return max;
+}
+
 int main() {
-    int rollNo;
-    char name[100];
-    float physicsMarks, mathMarks, chemistryMarks;
-    float totalMarks, percentage;
-    
-    printf("Enter Roll No: ");
-    scanf("%d", &rollNo);
-    
-    printf("Enter Name: ");
-    scanf(" %[^\n]", name);
-    
-    printf("Enter Marks of Physics: ");
-    scanf("%f", &physicsMarks);
-    
-    printf("Enter Marks of Math: ");
-    scanf("%f", &mathMarks);
-    
-    printf("Enter Marks of Chemistry: ");
-    scanf("%f", &chemistryMarks);
-    
-    totalMarks = physicsMarks + mathMarks + chemistryMarks;
-    percentage = (totalMarks / 300) * 100;
-    
-    printf("\n---------- Summary ----------\n");
-    printf("Roll No: %d\n", rollNo);
-    printf("Name: %s\n", name);
-    printf("Physics Marks: %.2f\n", physicsMarks);
-    printf("Math Marks: %.2f\n", mathMarks);
-    printf("Chemistry Marks: %.2f\n", chemistryMarks);
-    printf("Total Marks: %.2f\n", totalMarks);
-    printf("Percentage: %.2f%%\n", percentage);
+    int num;
+
+ 
+    printf("Enter a 4-digit number: ");
+    scanf("%d", &num);
+
+
+    int largest = findLargestAfterDigitDeletion(num);
+
+    printf("Largest number after deleting a single digit: %d\n", largest);
+
     return 0;
 }

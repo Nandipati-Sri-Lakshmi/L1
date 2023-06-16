@@ -1,44 +1,56 @@
 #include <stdio.h>
 
-int main() {
-    float operand1, operand2, result;
-    char operator;
+void findSmallestLargestDigits(int n, int numbers[]) {
+    int i, j;
+    int smallestDigit = 9, largestDigit = 0;
+    int isValid = 1;
 
-    printf("Enter Number 1: ");
-    scanf("%f", &operand1);
-
-    printf("Enter the operator (+, -, *, /): ");
-    scanf(" %c", &operator);
-
-    printf("Enter Number 2: ");
-    scanf("%f", &operand2);
-
-    switch (operator) {
-        case '+':
-            result = operand1 + operand2;
-            printf("Result: %.2f\n", result);
+    for (i = 0; i < n; i++) {
+        int num = numbers[i];
+        
+        if (num < 0) {
+            isValid = 0;
             break;
-        case '-':
-            result = operand1 - operand2;
-            printf("Result: %.2f\n", result);
-            break;
-        case '*':
-            result = operand1 * operand2;
-            printf("Result: %.2f\n", result);
-            break;
-        case '/':
-            if (operand2 != 0) {
-                result = operand1 / operand2;
-                printf("Result: %.2f\n", result);
-            } else {
-                printf("Error: Division by zero!\n");
+        }
+
+        while (num > 0) {
+            int digit = num % 10;
+            if (digit < smallestDigit) {
+                smallestDigit = digit;
             }
-            break;
-        default:
-            printf("Error: Invalid operator!\n");
-            break;
+            if (digit > largestDigit) {
+                largestDigit = digit;
+            }
+            num /= 10;
+        }
     }
 
+    if (isValid) {
+        printf("Smallest Digit: %d\n", smallestDigit);
+        printf("Largest Digit: %d\n", largestDigit);
+    } else {
+        printf("Not Valid\n");
+    }
+}
+
+int main() {
+    int n;
+    printf("Enter the value of n: ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Invalid input! n should be a positive integer.\n");
+        return 1;
+    }
+
+    int numbers[n];
+    printf("Enter the numbers:\n");
+    for (int i = 0; i < n; i++) {
+        printf("n%d = ", i+1);
+        scanf("%d", &numbers[i]);
+    }
+
+    findSmallestLargestDigits(n, numbers);
 
     return 0;
 }
